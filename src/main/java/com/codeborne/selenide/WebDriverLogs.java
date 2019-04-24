@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.toList;
 
 public class WebDriverLogs {
   private final Driver driver;
@@ -25,7 +26,9 @@ public class WebDriverLogs {
 
   private List<LogEntry> getLogEntries(String logType, Level logLevel) {
     try {
-      return driver.getWebDriver().manage().logs().get(logType).filter(logLevel);
+      return driver.getWebDriver().manage().logs().get(logType).getAll()
+        .stream().filter(log -> log.getLevel().equals(logLevel))
+        .collect(toList());
     }
     catch (UnsupportedOperationException ignore) {
       return emptyList();
