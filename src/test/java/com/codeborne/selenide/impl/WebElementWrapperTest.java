@@ -11,7 +11,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -48,7 +47,7 @@ class WebElementWrapperTest implements WithAssertions {
 
   @Test
   void toStringPrintsTagNameWithSomeAttributes() {
-    webDriver = mock(HtmlUnitDriver.class);
+    webDriver = mock(WebDriver.class);
     driver = new DriverStub(config, new Browser("htmlunit", false), webDriver, null);
 
     assertThat(new WebElementWrapper(driver, element))
